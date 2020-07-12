@@ -8,5 +8,6 @@ dependencies:
 - ipykernel
 - qsharp==0.12.2007.124
 - pip
+- matplotlib
 - pip:
   - RISE

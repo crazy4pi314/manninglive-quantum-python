@@ -18,7 +18,7 @@ namespace ManningLive.Demo {
     /// # Input
     /// ## FavoriteNumber
     /// The integer you think is the coolest.
-    function HelloWorld (favoriteNumber : Int) : Unit {
+    function HelloWorld(favoriteNumber : Int) : Unit {
         Message($"Hello, world! I like the number {favoriteNumber}.");
     }
 
@@ -31,12 +31,10 @@ namespace ManningLive.Demo {
     /// to that qubit such that it has the state (1/√2) |0⟩ + (1/√2) |1⟩.
     /// Measurement of this state returns a One Result with probability 0.5
     /// and a Zero Result with probability 0.5. 
-    operation Qrng() : Result {
+    operation SampleQrng() : Result {
         using (qubit = Qubit()) {
-
             H(qubit);
-
-            return MResetZ(qubit);
+            return M(qubit);
         }
     }
 
@@ -59,7 +57,7 @@ namespace ManningLive.Demo {
 
             H(qubit);
 
-            Message("After using H(qubit) to create a superposition state:");
+            Message("After using H(qubit) to prepare a superposition state:");
             DumpRegister((), [qubit]);
  
             return MResetZ(qubit);

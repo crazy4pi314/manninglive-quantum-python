@@ -24,41 +24,55 @@ namespace ManningLive.DeutschJozsa {
     }
 
     operation CheckIfOracleIsBalanced(
+            verbose : Bool,
             oracle : ((Qubit, Qubit) => Unit)              
     ) : Bool {
-        using ((control, target) = (Qubit(), Qubit())) {   
-            H(control);                                    
-            X(target);
-            H(target);
+        using ((control, target) = (Qubit(), Qubit())) {
+            // Prepare superposition on the control register.
+            H(control);                                   
 
-            oracle(control, target);                       
+            // Use the phase kickback technique from Chapter 7
+            // to learn a global property of our oracle.
+            within {
+                X(target);
+                H(target);
+            } apply {
+                if (verbose) {
+                    Message("Before oracle call:");
+                    DumpMachine();
+                }
 
-            H(target);                                     
-            X(target);
+                oracle(control, target);
+                
+                if (verbose) {
+                    Message("\n\nAfter oracle call:");
+                    DumpMachine();
+                }
+            }
 
             return MResetX(control) == One;                
         }
     }
 
     operation RunDeutschJozsaAlgorithm(verbose : Bool) : Unit {
-        Fact(not CheckIfOracleIsBalanced(ApplyZeroOracle), "Test failed for zero oracle."); 
+        Fact(not CheckIfOracleIsBalanced(false, ApplyZeroOracle), "Test failed for zero oracle."); 
         if (verbose) {
-            Message($"The ZeroOracle is Balanced: {CheckIfOracleIsBalanced(ApplyZeroOracle)}");
+            Message($"The ZeroOracle is Balanced: {CheckIfOracleIsBalanced(false, ApplyZeroOracle)}");
         }
 
-        Fact(not CheckIfOracleIsBalanced(ApplyOneOracle), "Test failed for one oracle.");  
+        Fact(not CheckIfOracleIsBalanced(false, ApplyOneOracle), "Test failed for one oracle.");  
         if (verbose) {
-            Message($"The OneOracle is Balanced: {CheckIfOracleIsBalanced(ApplyOneOracle)}");
+            Message($"The OneOracle is Balanced: {CheckIfOracleIsBalanced(false, ApplyOneOracle)}");
         } 
 
-        Fact(CheckIfOracleIsBalanced(ApplyIdOracle), "Test failed for id oracle.");
+        Fact(CheckIfOracleIsBalanced(false, ApplyIdOracle), "Test failed for id oracle.");
         if (verbose) {
-            Message($"The IdOracle is Balanced: {CheckIfOracleIsBalanced(ApplyIdOracle)}");
+            Message($"The IdOracle is Balanced: {CheckIfOracleIsBalanced(false, ApplyIdOracle)}");
         }
         
-        Fact(CheckIfOracleIsBalanced(ApplyNotOracle), "Test failed for not oracle.");
+        Fact(CheckIfOracleIsBalanced(false, ApplyNotOracle), "Test failed for not oracle.");
         if (verbose) {
-            Message($"The NotOracle is Balanced: {CheckIfOracleIsBalanced(ApplyNotOracle)}");
+            Message($"The NotOracle is Balanced: {CheckIfOracleIsBalanced(false, ApplyNotOracle)}");
         }
 
         Message("All tests passed!");                                           
