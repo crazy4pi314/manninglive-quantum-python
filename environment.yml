@@ -1,0 +1,12 @@
+name: manninglive_quantum
+channels:
+- conda-forge
+- quantum-engineering 
+dependencies:
+- notebook
+- numpy
+- ipykernel
+- qsharp==0.12.2007.124
+- pip
+- pip:
+  - RISE
