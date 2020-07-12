@@ -1,0 +1,10 @@
+{
+    "dockerFile": "Dockerfile",
+    "containerEnv": {
+        "IQSHARP_HOSTING_ENV": "crazy4pi314/manninglive-quantum-python devcontainer"
+    },
+    "extensions": [
+        "quantum.quantum-devkit-vscode",
+        "ms-python.python"
+    ]
+}
