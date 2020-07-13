@@ -1,4 +1,4 @@
-![manning logo](media/liveatManning-logo.png)
+![manning logo](media/liveatManning-Logo.png)
 ## Demo and talk for `import qsharp` : _Using your Python skills to develop quantum programs_ 
 ### live@Manning Conference 14 July 2020
 
