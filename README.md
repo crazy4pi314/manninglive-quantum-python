@@ -4,6 +4,8 @@
 ### live@Manning Conference 14 July 2020
 
 > Try running the presentation Jupyter notebook: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/crazy4pi314/manninglive-quantum-python/master?filepath=demo.ipynb)
+> 
+>The video for this presentation can be found on [YouTube](https://youtu.be/nMiSHq_FuT0)
 
 ### Want to learn more about Q# and Quantum developement with Python? 
 - Check out the book @cgranade and I wrote from Manning: [Learn Quantum Computing With Python and Q#](bit.ly/qsharp-book)
